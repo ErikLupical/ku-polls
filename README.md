@@ -20,5 +20,10 @@ To be added.
 All project documents are in the [Project Wiki](../../wiki/Home).
 
 - [Vision Statement](../../wiki/Vision%20Statement)
-- [Requirements](../../wiki/Requirements)
-- [Project Plan](../../wiki/Project%20Plan)
+- [Requirements](https://github.com/ErikLupical/ku-polls/wiki/Requirements)
+- [Project Plan](https://github.com/ErikLupical/ku-polls/wiki/Project-Plan)
+- [Iteration Plan 1](https://github.com/ErikLupical/ku-polls/wiki/Iteration-1-Plan)
+- [Iteration Plan 2](https://github.com/ErikLupical/ku-polls/wiki/Iteration-2-Plan)
+
+
+[![Django CI](https://github.com/ErikLupical/ku-polls/actions/workflows/django.yml/badge.svg)](https://github.com/ErikLupical/ku-polls/actions/workflows/django.yml)
