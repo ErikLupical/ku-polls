@@ -1,24 +1,26 @@
-{% load static %}
+{% extends "base.html" %}
 
-<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+{% block title %}Poll Details{% endblock %}
 
-<h1>{{ question.question_text }}</h1>
+{% block content %}
+    <h1>{{ question.question_text }}</h1>
 
-<table>
-    <thead>
-        <tr>
-            <th>Choice</th>
-            <th>Votes</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for choice in question.choice_set.all %}
-        <tr>
-            <td>{{ choice.choice_text }}</td>
-            <td>{{ choice.votes }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <th>Choice</th>
+                <th>Votes</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for choice in question.choice_set.all %}
+            <tr>
+                <td>{{ choice.choice_text }}</td>
+                <td>{{ choice.votes }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-<a href="{% url 'polls:index' %}">Back to List of Polls</a>
+    <a href="{% url 'polls:index' %}">Back to List of Polls</a>
+{% endblock %}
