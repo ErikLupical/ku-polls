@@ -11,6 +11,9 @@ from django.views import generic
 
 from .models import Choice, Question, CreateUserForm, Vote
 
+import logging
+
+logger = logging.getLogger('polls')
 
 class IndexView(generic.ListView):
     """
@@ -165,6 +168,7 @@ def vote(request, question_id):
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
+        logger.error(f"Choice does not exist for question {question_id} by user {request.user.username}")
         return render(request, 'polls/detail.html', {
             'question': question,
             'error_message': "You didn't select a choice.",
@@ -175,4 +179,5 @@ def vote(request, question_id):
         vote.save()
         messages.info(request, 'Your vote for "'+ question.question_text +'" has been recorded')
 
+        logger.info(f"User {request.user.username} voted for '{selected_choice.choice_text}' in question '{question.question_text}'")
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
