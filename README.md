@@ -9,7 +9,7 @@ https://cpske.github.io/ISP) course at [Kasetsart University](https://www.ku.ac.
 
 ## Installation
 
-Follow [Installation]([link](https://github.com/ErikLupical/ku-polls/blob/main/Installation.md)) guide to install the application.
+Follow [Installation](https://github.com/ErikLupical/ku-polls/blob/main/Installation.md) guide to install the application.
 
 ## Running the Application
 At the same directory of the application run:
