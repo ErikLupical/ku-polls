@@ -1,4 +1,5 @@
 # Online Polls Application for Survey Questions 
+[![Django CI](https://github.com/ErikLupical/ku-polls/actions/workflows/django.yml/badge.svg)](https://github.com/ErikLupical/ku-polls/actions/workflows/django.yml)
 
 An application to conduct online polls and surveys based
 on the [Django Tutorial project](https://docs.djangoproject.com/en/4.1/intro), with
@@ -32,6 +33,5 @@ All project documents are in the [Project Wiki](../../wiki/Home).
 - [Project Plan](https://github.com/ErikLupical/ku-polls/wiki/Project-Plan)
 - [Iteration Plan 1](https://github.com/ErikLupical/ku-polls/wiki/Iteration-1-Plan)
 - [Iteration Plan 2](https://github.com/ErikLupical/ku-polls/wiki/Iteration-2-Plan)
-
-
-[![Django CI](https://github.com/ErikLupical/ku-polls/actions/workflows/django.yml/badge.svg)](https://github.com/ErikLupical/ku-polls/actions/workflows/django.yml)
+- [Iteration Plan 3](https://github.com/ErikLupical/ku-polls/wiki/Iteration-3-Plan)
+- [Iteration Plan 4](https://github.com/ErikLupical/ku-polls/wiki/Iteration-4-Plan)
