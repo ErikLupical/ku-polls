@@ -36,6 +36,17 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+Load data into database
+```bash
+python manage.py loaddata data/polls-v4.json
+```
+```bash
+python manage.py loaddata data/users.json
+```
+```bash
+python manage.py loaddata data/votes-v4.json
+```
+
 Rename sample.env to .env
 ```bash
 move sample.env .env
