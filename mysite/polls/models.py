@@ -113,4 +113,4 @@ class Vote(models.Model):
     choice = models.ForeignKey(Choice, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.user.username} voted on {self.question}"
+        return f"{self.user.username} voted on {self.choice.question}"
