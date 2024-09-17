@@ -2,6 +2,17 @@ body {
     background: white url("images/background.png") no-repeat;
 }
 
+header {
+    padding: 10px;
+    text-align: right;
+    background-color: #f8f8f8;
+}
+
+.header-right {
+    font-size: 14px;
+    color: #333;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;

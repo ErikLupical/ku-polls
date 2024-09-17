@@ -1,11 +1,14 @@
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
-from .models import Choice, Question
+from .models import Choice, Question, CreateUserForm
 
 
 class IndexView(generic.ListView):
@@ -85,6 +88,52 @@ class ResultsView(generic.DetailView):
     template_name = 'polls/results.html'
 
 
+def user_register(request):
+    if request.user.is_authenticated:
+        return redirect('polls:index')
+    else:
+        form = CreateUserForm()
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+
+                user = form.cleaned_data.get('username')
+                messages.success(request, "Account for " + user + " was created successfully.")
+
+                return redirect('polls:index')
+
+        context={'form':form}
+        return render(request, 'polls/register.html', context)
+
+
+def user_login(request):
+    if request.user.is_authenticated:
+        return redirect('polls:index')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user = authenticate(request, username=username, password=password)
+        
+            if user is not None:
+                login(request, user)
+
+                return redirect('polls:index')
+            else:
+                # TODO this doesn't show the message
+                messages.info(request, 'Your username or passord is incorrect.')
+        
+        return render(request, 'polls/login.html')
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('polls:index')
+
+
+@login_required(login_url='polls:login')
 def vote(request, question_id):
     """
     Handle the voting process for a specific question.
