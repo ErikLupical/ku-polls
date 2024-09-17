@@ -1,5 +1,6 @@
 # Installation Guide
 ## Requirement
+* A Windows computer
 * Python 3.11 or higher
 * git
 * pip
