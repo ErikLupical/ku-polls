@@ -4,6 +4,10 @@
 
 {% block content %}
     <h1>{{ question.question_text }}</h1>
+    
+    {% for message in messages %}
+    <p id="messages"> {{message}} </p>
+    {%endfor %}
 
     <table>
         <thead>

@@ -1,3 +1,4 @@
+from typing import Any
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -8,7 +9,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
-from .models import Choice, Question, CreateUserForm
+from .models import Choice, Question, CreateUserForm, Vote
 
 
 class IndexView(generic.ListView):
@@ -55,6 +56,19 @@ class DetailView(generic.DetailView):
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
     
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            try:
+                vote = Vote.objects.get(user=self.request.user)
+                context['selected_choice'] = vote.choice.id
+            except Vote.DoesNotExist:
+                context['selected_choice'] = None
+        else:
+            context['selected_choice'] = None
+
+        return context
+
     def get(self, request, *args, **kwargs):
         """
         Handle GET requests. Redirect to index page with an error message if voting is not allowed.
@@ -122,7 +136,6 @@ def user_login(request):
 
                 return redirect('polls:index')
             else:
-                # TODO this doesn't show the message
                 messages.info(request, 'Your username or passord is incorrect.')
         
         return render(request, 'polls/login.html')
@@ -146,6 +159,8 @@ def vote(request, question_id):
         HttpResponseRedirect: Redirects to the results page of the question after processing the vote.
     """
     question = get_object_or_404(Question, pk=question_id)
+    user = request.user
+
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
@@ -155,9 +170,9 @@ def vote(request, question_id):
             'error_message': "You didn't select a choice.",
         })
     else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
+        vote, created = Vote.objects.get_or_create(user=user)
+        vote.choice = selected_choice
+        vote.save()
+        messages.info(request, 'Your vote for "'+ question.question_text +'" has been recorded')
+
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))

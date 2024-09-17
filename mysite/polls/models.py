@@ -92,7 +92,11 @@ class Choice(models.Model):
     """
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
+
+    @property
+    def votes(self):
+        return Vote.objects.filter(choice=self).count()
+
     
     def __str__(self):
         """
@@ -102,3 +106,11 @@ class Choice(models.Model):
             str: The text of the choice.
         """
         return self.choice_text
+    
+class Vote(models.Model):
+    """Record a choice for a question made by a user."""
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    choice = models.ForeignKey(Choice, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user.username} voted on {self.question}"
