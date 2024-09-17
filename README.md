@@ -1,4 +1,4 @@
-## KU Polls: Online Survey Questions 
+# Online Polls Application for Survey Questions 
 
 An application to conduct online polls and surveys based
 on the [Django Tutorial project](https://docs.djangoproject.com/en/4.1/intro), with
@@ -9,11 +9,19 @@ https://cpske.github.io/ISP) course at [Kasetsart University](https://www.ku.ac.
 
 ## Installation
 
-To be added. If the procedure is long, put it in the wiki or a separate file.
+Follow [Installation](link) guide to install the application.
 
 ## Running the Application
+At the same directory of the application run:
+``python manage.py runserver``
 
-To be added.
+## Demo Users
+## Demo user
+| username | password | 
+|-------|-------| 
+| demo1 | lupical1 | 
+| demo2 | lupical2 | 
+| demo3 | lupical3 |
 
 ## Project Documents
 
